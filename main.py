@@ -7,8 +7,6 @@ Sprache: Python
 3. if's erstellen für navigation und bearbeitung aller dateien
 """
 
-import os
-
 help = "H"
 close = "C"
 cont = "Y"
