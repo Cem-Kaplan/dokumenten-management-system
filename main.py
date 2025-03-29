@@ -7,10 +7,19 @@ Sprache: Python
 3. if's erstellen für navigation und bearbeitung aller dateien
 """
 
+# bibliotheken
+
+from pathlib import Path
+
+# commands zu navigation
+
 help = "H"
 close = "C"
 cont = "Y"
 newTextFile = "N"
+listAllFiles = "L"
+
+# nochn paar weitere nachrichten/informationen
 
 version = 1.0
 willkommenstext = f"""
@@ -18,32 +27,25 @@ willkommenstext = f"""
 Version: {version}
 Hilfe: {help}
 Schließen: {close}
-Fortfahren: {cont}
-
-"""
+Fortfahren: {cont}\n"""
 
 hilfetext = f"""
 ###### Anleitung ######
 Schließen: {close}
-Fortfahren: {cont}
-
-"""
+Fortfahren: {cont}\n"""
 
 continuetext = f"""
 ###### Was möchten sie machen? ######
-Neue Datei erstellen: {newTextFile}
-
-"""
+Neue Datei erstellen: {newTextFile}\n"""
 
 addAttributeName = f"""
-Bitte Datei namen eingeben (A-Z, 0-9 oder _ möglich)
-
-"""
+Bitte Datei namen eingeben (A-Z, 0-9 oder _ möglich)\n"""
 
 addAttributeFormat = f"""
-Bitte Format eingeben (txt möglich)
-
-"""
+Bitte Format eingeben, Beispiele:
+txt - standart text datei
+odt - OpenDocument datei
+pdf - Portable Document Format\n"""
 
 print(willkommenstext)
 
@@ -55,7 +57,15 @@ def createFile():
 
     with open(file, 'w'):
         print("datei " + file + " erstellt.")
-#TODO: Klassen erstellen
+
+#TODO funktion zur auflistung aller dateien im ordner erstellen
+
+def listFiles():
+    filePath = Path().resolve
+    allfiles = list(filePath)
+    print(allfiles)
+
+# Klasse "File", erstellt die baupläne für die zukünftig erstellten dateien
 
 class File:
     def __init__(self, name, fileFormat):
@@ -81,13 +91,17 @@ while True:
     
     elif prompt1 == newTextFile:
         
-        txtFileName = input(addAttributeName + ":")
-        txtFileFormat = input(addAttributeFormat + ":")
+        txtFileName = input(addAttributeName + ": ")
+        txtFileFormat = input(addAttributeFormat + ": ")
         currentFile = File(txtFileName, txtFileFormat)
         print(currentFile)
         createFile()
+    
+    elif prompt1 == listAllFiles:
+        listFiles()
+    
     else:
     
-        print("Ungültiger Keyword. Bitte einen vorhandenen Keyword eingeben")
+        print("Ungültiger command. Bitte einen vorhandenen command eingeben")
 
 print("Programm wird beendet")
